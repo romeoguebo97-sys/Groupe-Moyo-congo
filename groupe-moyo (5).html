@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groupe Moyo — Connecter les Congolais aux bonnes opportunités</title>
+  <meta name="description" content="Groupe Moyo réunit Moyo Dating et Moyo Business : un écosystème numérique conçu pour connecter les Congolais, au pays comme dans la diaspora." />
+
+  <style>
+    :root {
+      --bg: #08080D;
+      --bg-soft: #0E0E16;
+      --bg-card: #12121C;
+      --line: rgba(255,255,255,0.09);
+      --line-strong: rgba(255,255,255,0.16);
+      --text: #F5F4F0;
+      --text-dim: #B5B4BE;
+      --text-faint: #73727D;
+      --gold: #D4AF37;
+      --gold-soft: rgba(212,175,55,0.14);
+      --gold-line: rgba(212,175,55,0.42);
+      --dating: #C0392B;
+      --dating-soft: rgba(192,57,43,0.14);
+      --dating-line: rgba(192,57,43,0.42);
+      --business: #2F6F76;
+      --business-soft: rgba(47,111,118,0.16);
+      --business-line: rgba(70,150,158,0.45);
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Fraunces, "Iowan Old Style", "Palatino Linotype", serif;
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .wrap {
+      width: min(1180px, 88%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 24px rgba(212,175,55,0.7);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(8,8,13,0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      gap: 20px;
+    }
+
+    .wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      font-family: var(--sans);
+      flex-shrink: 0;
+    }
+
+    .wordmark .groupe {
+      color: var(--gold);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .wordmark .name {
+      color: var(--text);
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 2px;
+    }
+
+    .nav-logins {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .login-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      background: #FFFFFF;
+      color: #08080D;
+      box-shadow: 0 6px 18px -8px rgba(255,255,255,0.35);
+      cursor: pointer;
+    }
+
+    .login-btn svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      color: #08080D;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      background: #F4F2EC;
+      box-shadow: 0 10px 24px -8px rgba(255,255,255,0.5);
+    }
+
+    .login-btn:active {
+      transform: translateY(0) scale(0.96);
+      background: #E7E4DC;
+      box-shadow: 0 4px 10px -6px rgba(255,255,255,0.4);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 110px 0 80px;
+      background:
+        radial-gradient(ellipse 65% 55% at 80% 8%, rgba(212,175,55,0.17), transparent 58%),
+        radial-gradient(ellipse 45% 35% at 6% 90%, rgba(192,57,43,0.08), transparent 60%),
+        linear-gradient(180deg, #08080D 0%, #0B0B12 100%);
+      overflow: hidden;
+    }
+
+    .hero-thread {
+      position: absolute;
+      right: -6%;
+      top: 0;
+      height: 100%;
+      width: 62%;
+      opacity: 0.52;
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 910px; }
+
+    h1, h2, h3, blockquote {
+      font-family: var(--sans);
+      letter-spacing: -0.05em;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      max-width: 850px;
+    }
+
+    h1 span { color: var(--gold); }
+
+    .lead {
+      max-width: 650px;
+      margin: 0;
+      font-size: clamp(17px, 1.6vw, 21px);
+      line-height: 1.65;
+      color: var(--text-dim);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 44px 0 66px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 26px;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn svg { width: 16px; height: 16px; transition: transform 0.18s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:hover svg { transform: translateX(3px); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #E6C762, #C9A02C);
+      color: #08080D;
+      box-shadow: 0 10px 30px -12px rgba(212,175,55,0.65);
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #D8453A, #A82E22);
+      color: #FFFFFF;
+      box-shadow: 0 10px 30px -12px rgba(192,57,43,0.65);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--line-strong);
+      background: rgba(255,255,255,0.025);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover { background: rgba(255,255,255,0.065); }
+
+    .hero-stats {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+      max-width: 690px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat .num {
+      display: block;
+      font-family: var(--serif);
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .stat .label {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    section { position: relative; }
+
+    .section-block {
+      padding: 110px 0;
+    }
+
+    .section-soft {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      max-width: 660px;
+      margin-bottom: 54px;
+    }
+
+    .section-head h2 {
+      margin: 18px 0 0;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.08;
+      font-weight: 800;
+    }
+
+    .section-head p {
+      margin: 20px 0 0;
+      color: var(--text-dim);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .branch {
+      padding: 52px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      min-height: 500px;
+    }
+
+    .branch:first-child { border-right: 1px solid var(--line); }
+    .branch.dating { background: linear-gradient(150deg, rgba(192,57,43,0.11), transparent 55%); }
+    .branch.business { background: linear-gradient(210deg, rgba(212,175,55,0.13), transparent 55%); }
+
+    .branch-tag {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .dating .branch-tag { color: #F0958A; background: var(--dating-soft); border: 1px solid var(--dating-line); }
+    .business .branch-tag { color: var(--gold); background: var(--gold-soft); border: 1px solid var(--gold-line); }
+
+    .branch-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .dating .branch-icon { background: var(--dating-soft); color: #F0958A; }
+    .business .branch-icon { background: var(--gold-soft); color: var(--gold); }
+    .branch-icon svg, .branch-tag svg { width: 20px; height: 20px; }
+
+    .branch h3 {
+      font-size: 32px;
+      margin: 0 0 16px;
+      font-weight: 600;
+    }
+
+    .branch p {
+      margin: 0 0 28px;
+      color: var(--text-dim);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 430px;
+    }
+
+    .branch-points {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .branch-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text-dim);
+      font-size: 14.5px;
+    }
+
+    .branch-points svg {
+      width: 15px;
+      height: 15px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .dating .branch-points svg { color: #F0958A; }
+    .business .branch-points svg { color: var(--gold); }
+
+    .branch-link {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .dating .branch-link { color: #F0958A; }
+    .business .branch-link { color: var(--gold); }
+    .branch-link svg { width: 16px; height: 16px; transition: transform 0.18s ease; }
+    .branch-link:hover svg { transform: translateX(4px); }
+
+    .vision {
+      display: flex;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .vision blockquote {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(26px, 3.2vw, 38px);
+      line-height: 1.28;
+      font-weight: 500;
+    }
+
+    .vision blockquote span {
+      display: block;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    footer {
+      padding: 58px 0 36px;
+      border-top: 1px solid var(--line);
+      background: #07070B;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding-bottom: 36px;
+    }
+
+    .footer-brand p {
+      max-width: 310px;
+      color: var(--text-faint);
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 14px 0 0;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin: 0 0 16px;
+    }
+
+    .footer-col a, .footer-col p {
+      display: block;
+      color: var(--text-dim);
+      font-size: 14px;
+      margin: 0 0 11px;
+    }
+
+    .footer-col a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line);
+      padding-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--text-faint);
+      font-size: 12.5px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 860px) {
+      .hero { min-height: auto; padding: 86px 0 72px; }
+      .hero-thread { width: 100%; right: -45%; opacity: 0.36; }
+      .hero-actions { margin-bottom: 46px; }
+      .hero-stats { gap: 28px; }
+      .branch-grid { grid-template-columns: 1fr; }
+      .branch:first-child { border-right: none; border-bottom: 1px solid var(--line); }
+      .branch { min-height: auto; padding: 42px 28px; }
+      .section-block { padding: 82px 0; }
+      .nav { padding: 14px 5%; }
+      .login-btn span.full-label { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .nav { gap: 10px; }
+      .login-btn { padding: 9px 12px; font-size: 12.5px; }
+    }
+
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 34px, 1180px); }
+      .btn { width: 100%; justify-content: center; }
+      .hero-stats { flex-direction: column; }
+      .section-head { margin-bottom: 36px; }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        min-height: auto;
+        padding: 58px 0 54px;
+      }
+
+      h1 {
+        font-size: clamp(38px, 13vw, 58px);
+        line-height: 0.95;
+        letter-spacing: -0.055em;
+        max-width: 100%;
+      }
+
+      .lead {
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 100%;
+      }
+
+      .hero-actions {
+        margin: 32px 0 40px;
+      }
+
+      .branch-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .branch:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .branch {
+        min-height: auto;
+        padding: 34px 24px;
+      }
+
+      .section-block {
+        padding: 64px 0;
+      }
+
+      .section-head h2 {
+        font-size: 28px;
+      }
+
+      .vision {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .vision blockquote {
+        font-size: 26px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="grain"></div>
+
+  <nav class="nav">
+    <a href="#top" class="wordmark">
+      <span class="groupe">Groupe</span>
+      <span class="name">Moyo-Congo</span>
+    </a>
+    <div class="nav-logins">
+      <a href="http://dating.moyo-congo.com/" class="login-btn dating">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+        <span class="full-label">Connexion</span> Moyo Dating
+      </a>
+      <a href="https://business.moyo-congo.com/login" class="login-btn business">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+        <span class="full-label">Connexion</span> Moyo Business
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero" id="top">
+    <svg class="hero-thread" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M520 0C460 120 600 220 520 340C440 460 580 560 500 680C460 740 480 780 520 800" stroke="#D4AF37" stroke-opacity="0.25" stroke-width="1.4" fill="none"/>
+      <path d="M410 0C350 130 470 235 390 355C310 475 435 590 350 720" stroke="#C0392B" stroke-opacity="0.16" stroke-width="1.1" fill="none"/>
+      <circle cx="520" cy="0" r="3" fill="#D4AF37" fill-opacity="0.65"/>
+      <circle cx="500" cy="680" r="3" fill="#C0392B" fill-opacity="0.65"/>
+    </svg>
+
+    <div class="wrap">
+      <div class="hero-content reveal">
+        <h1>Un écosystème digital<br>pensé pour connecter les<br>Congolais.</h1>
+        <p class="lead">
+          Rencontres, business et services. Une seule vision&nbsp;: rapprocher les personnes des bonnes opportunités, au Congo comme dans la diaspora.
+        </p>
+
+        <div class="hero-actions">
+          <a href="http://dating.moyo-congo.com/" class="btn btn-red">
+            Découvrir Moyo Dating
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="https://business.moyo-congo.com" class="btn btn-gold">
+            Découvrir Moyo Business
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="num">2</span>
+            <span class="label">Plateformes actives</span>
+          </div>
+          <div class="stat">
+            <span class="num">100%</span>
+            <span class="label">Pensé pour les Congolais</span>
+          </div>
+          <div class="stat">
+            <span class="num">+242</span>
+            <span class="label">Congo & diaspora</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section-soft" id="plateformes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Nos plateformes</span>
+        <h2>Deux plateformes. Une même ambition.</h2>
+        <p>Groupe Moyo rassemble des solutions simples, utiles et ciblées pour répondre aux besoins réels de la communauté congolaise.</p>
+      </div>
+
+      <div class="branch-grid reveal">
+        <article class="branch dating">
+          <span class="branch-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.1C.5 8.6 2 5 5.5 5c2 0 3.4 1.1 4.2 2.2C10.6 6.1 12 5 14 5c3.5 0 5 3.6 3.5 6.9C19.5 16.4 12 21 12 21z"/></svg>
+            Rencontres
+          </span>
+          <div class="branch-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7.5-4.6-10-9.1C.5 8.6 2 5 5.5 5c2 0 3.4 1.1 4.2 2.2C10.6 6.1 12 5 14 5c3.5 0 5 3.6 3.5 6.9C19.5 16.4 12 21 12 21z"/></svg>
+          </div>
+          <h3>Moyo Dating</h3>
+          <p>Trouver une relation sérieuse avec des célibataires congolais au pays et dans la diaspora.</p>
+          <ul class="branch-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Une communauté congolaise ciblée</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Des profils sérieux et des échanges directs</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Une expérience pensée pour la confiance</li>
+          </ul>
+          <a href="http://dating.moyo-congo.com/" class="branch-link">
+            Découvrir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <article class="branch business">
+          <span class="branch-tag">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 21V9l8-5 8 5v12h-6v-6H10v6H4z"/></svg>
+            Services & opportunités
+          </span>
+          <div class="branch-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          </div>
+          <h3>Moyo Business</h3>
+          <p>Connecter les besoins aux compétences congolaises&nbsp;: professionnels, clients, entrepreneurs et opportunités au même endroit.</p>
+          <ul class="branch-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Les pros proposent leurs services</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Les clients publient leurs besoins</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Une mise en relation locale et directe</li>
+          </ul>
+          <a href="https://business.moyo-congo.com" class="branch-link">
+            Découvrir
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section-soft" id="vision">
+    <div class="wrap vision reveal">
+      <blockquote>
+        <span>Notre Vision :</span> Faire de Moyo une marque numérique forte, utile et fiable, capable d'accompagner les Congolais dans leurs relations, leurs projets et leurs opportunités.
+      </blockquote>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#top" class="wordmark">
+            <span class="groupe">Groupe</span>
+            <span class="name">Moyo-Congo</span>
+          </a>
+          <p>Un groupe, plusieurs solutions, une même ambition&nbsp;: connecter les personnes aux bonnes opportunités.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Plateformes</h4>
+            <a href="http://dating.moyo-congo.com/">Moyo Dating</a>
+            <a href="https://business.moyo-congo.com">Moyo Business</a>
+          </div>
+          <div class="footer-col">
+            <h4>Groupe</h4>
+            <a href="#vision">Vision</a>
+            <a href="mailto:contact@moyo-congo.com">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Légal</h4>
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de confidentialité</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Groupe Moyo. Tous droits réservés.</span>
+        <span>Brazzaville · Paris · Diaspora</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('in'));
+    }
+  </script>
+</body>
+</html>
