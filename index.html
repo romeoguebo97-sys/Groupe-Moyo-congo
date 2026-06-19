@@ -523,8 +523,21 @@
     }
 
     @media (max-width: 600px) {
-      .nav { gap: 10px; }
-      .login-btn { padding: 9px 12px; font-size: 12.5px; }
+      .nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        row-gap: 12px;
+      }
+      .nav-logins {
+        width: 100%;
+        gap: 10px;
+      }
+      .login-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 10px;
+        font-size: 12.5px;
+      }
     }
 
     @media (max-width: 520px) {
@@ -537,24 +550,24 @@
     @media (max-width: 520px) {
       .hero {
         min-height: auto;
-        padding: 58px 0 54px;
+        padding: 48px 0 48px;
       }
 
       h1 {
-        font-size: clamp(38px, 13vw, 58px);
-        line-height: 0.95;
-        letter-spacing: -0.055em;
+        font-size: clamp(32px, 9.5vw, 42px);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
         max-width: 100%;
       }
 
       .lead {
-        font-size: 16px;
+        font-size: 15.5px;
         line-height: 1.6;
         max-width: 100%;
       }
 
       .hero-actions {
-        margin: 32px 0 40px;
+        margin: 28px 0 36px;
       }
 
       .branch-grid {
